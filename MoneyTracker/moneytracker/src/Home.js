@@ -81,6 +81,12 @@ function Home() {
                 <img src = "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/2x/external-transaction-history-online-money-service-flaticons-lineal-color-flat-icons-2.png" alt = "trans-hist"></img>
                 <p>Transaction History</p>
             </div>
+            <div id = "pend-hist" onClick={() => {
+                navigate('/pending');
+            }}>
+                <img src = "https://img.icons8.com/external-icongeek26-linear-colour-icongeek26/2x/external-hour-glass-measurement-icongeek26-linear-colour-icongeek26.png" alt = "pend-hist"></img>
+                <p>Pending Transaction</p>
+            </div>
             </div>
         </Left>
         <Right>
