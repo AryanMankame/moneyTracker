@@ -51,23 +51,41 @@ const ChatButton = styled.button`
     background-color: #004d4d;
   }
 `;
+function makeid(length) {
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
+}
+
+var email = makeid(5)
 var m = 0
-const socket = io("http://localhost:3002");
+const socket = io("http://localhost:3002",{query:`loggeduser=${email}`});
 function ChatApp() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  // const [email,setEmail] = useState('abc@gmail.com')
   // const [id,setid] = useState(0);
   useEffect(() => {
       if(m > 0) return ;
       socket.on('connect',() => {
         console.log("Connected" + socket.id);
         // m.push(socket.id);
+        // socket.emit(email);
         setMessages([...messages,"Im on... " + socket.id]);
       })
       socket.on('new_inserted',(data) =>{
         // alert(socket.id)
         // m.push(data)
         setMessages(message => [...message,data])
+      })
+      socket.on("checkme",(data) => {
+        console.log('data ==> ',data)
       })
       m += 1
   },[])
